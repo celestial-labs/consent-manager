@@ -121,6 +121,10 @@
   border-color: var(--highlight);
   border-radius: .5em;
 
+  .hidden {
+    display: none;
+  }
+
   .text_base {
     font-size: 1em;
     line-height: 1.5;

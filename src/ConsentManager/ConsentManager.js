@@ -25,10 +25,13 @@ export class ConsentManager {
         this.consentCookie = null
         this.hasConsent = null
         this.consent = null
+        this.state = null
+        this.consentManagerEl = null
         this.emitter = mitt()
         this.isBot = this.isBotCheck()
         this.isToTrack = this.isToTrackCheck()
         this.consentManager = null
+
         this.emitter.on('*', (type, e) => console.log(type, e))
         this.emitter.on('manager:initialized', (e) => this.loadConsent(e))
 
@@ -39,16 +42,22 @@ export class ConsentManager {
         this.emitter.emit('manager:initialized', this)
     }
 
-    /*
-     * Check if user already consent
-     */
     loadConsent(e) {
         this.consentCookie = Cookies.get(this.options.cookie.name)
         this.hasConsent = false
 
         if (this.consentCookie) {
             this.consent = this.consentCookie
+            this.state = this.consentCookie
             this.hasConsent = true
+        } else {
+            const state = {}
+
+            Object.entries(this.options.consentTypes).forEach((consent) => {
+                state[consent[0]] = !!(consent[1].defaultState === 'granted')
+            })
+
+            this.state = state
         }
 
         this.emitter.emit('consent:loaded', {hasConsent: this.hasConsent, consent: this.consent})
@@ -95,9 +104,36 @@ export class ConsentManager {
     }
 
     render() {
+        // const consentDom = Consent(this.options, this.$t)
         document.body.insertAdjacentHTML('beforeend', Consent(this.options, this.$t));
+        this.consentManagerEl = document.getElementById('consent-manager')
 
-        new Accordion('.accordion-container');
+        setTimeout(() => {
+            new Accordion('.accordion-container');
+            const switches = this.consentManagerEl.querySelectorAll('.consent .consent-option .switch input')
+
+            switches.forEach((toggle) => {
+                toggle.addEventListener('change', () => {
+                    this.emitter.emit('consent:toggle', {consent: toggle.getAttribute('data-consent'), value: toggle.checked})
+                });
+            })
+
+            this.consentManagerEl.querySelectorAll('.btn').forEach((btn) => {
+                btn.addEventListener('click', event => {
+                    this.emitter.emit('consent:btn-clicked', {btn: event.target.id, target: event.target})
+                });
+            })
+
+            this.emitter.on('consent:btn-clicked', (payload) => {
+                if(payload.btn === 'consent-accept-btn') {
+                    this.commitConsent()
+                }
+
+                if(payload.btn === 'consent-settings-btn') {
+                    this.consentManagerEl.querySelector('#consent-options').classList.toggle('hidden')
+                }
+            })
+        }, 100)
     }
 
     // noinspection JSUnusedGlobalSymbols
@@ -112,6 +148,33 @@ export class ConsentManager {
 
     gTag(method, data) {
         console.log(method, data)
+    }
+
+    setState(state) {
+        this.state = state
+        this.emitter.emit('state:changed', this.state)
+    }
+
+    commitConsent() {
+        console.log(window.dataLayer, this.state)
+
+        this.updateGoogleConsent()
+        console.log(window.dataLayer)
+    }
+
+    updateGoogleConsent() {
+        console.log(window.gtag)
+        if(window.gtag) {
+            window.gtag('consent', 'update', {
+                'ad_storage': 'granted',
+                'analytics_storage': 'denied'
+            });
+
+
+            // window.dataLayer.push({
+            //     'event': 'update_consent'
+            // })
+        }
     }
 }
 

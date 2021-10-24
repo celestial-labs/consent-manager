@@ -11,51 +11,46 @@
     "cookie_path": "/"
   },
   "consentTypes": {
-    "ad_storage": {
-      "state": "denied",
+    "functionality_storage": {
+      "defaultState": "granted",
       "required": true,
       "disabled": true,
-      "recommended": true,
+      "i18n": {
+        "title": "Functionality",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+      }
+    },
+    "ad_storage": {
+      "defaultState": "granted",
+      "required": false,
+      "disabled": true,
       "i18n": {
         "title": "Storage",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
       }
     },
     "analytics_storage": {
-      "state": "denied",
-      "required": true,
+      "defaultState": "granted",
+      "required": false,
       "disabled": false,
-      "recommended": true,
       "i18n": {
         "title": "Analytics",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
       }
     },
-    "functionality_storage": {
-      "state": "denied",
-      "required": false,
-      "disabled": false,
-      "recommended": true,
-      "i18n": {
-        "title": "Functionality",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-      }
-    },
     "personalization_storage": {
-      "state": "denied",
+      "defaultState": "granted",
       "required": false,
       "disabled": false,
-      "recommended": true,
       "i18n": {
         "title": "Personalization",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
       }
     },
     "security_storage": {
-      "state": "denied",
+      "defaultState": "granted",
       "required": false,
       "disabled": false,
-      "recommended": true,
       "i18n": {
         "title": "Security",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
@@ -69,5 +64,5 @@
     }
   ],
   "wait_for_update": 2000,
-  "node": "#app"
+  "node": "body"
 }

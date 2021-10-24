@@ -3,7 +3,7 @@ import stylesText from 'bundle-text:./style/consent.scss'
 
 export function Consent(options, $t) {
     injectStyle()
-    return `<div class="consent">${backdrop()}${modal(options, $t)}</div>`
+    return `<div id="consent-manager" class="consent">${backdrop()}${modal(options, $t)}</div>`
 }
 
 export function injectStyle() {
@@ -27,19 +27,18 @@ export function modal(options, $t) {
             <div class="consent_content">
                 <div class="consent_title text_lg">${$t('title')}</div>
                 <div class="body text_sm">${$t('body')}</div>
-                <div class="consent_options">
-                <div class="accordion-container">
-                    ${consents.join('')}
-                </div>
-                
+                <div id="consent-options" class="consent_options hidden">
+                    <div class="accordion-container">
+                        ${consents.join('')}
+                    </div>
                 </div>
                 
                 <div class="flex"> 
                     <div style="flex-grow: 1; padding: 0 .5em 0 0;">
-                        <div class="btn" style="margin: 0">Settings</div>
+                        <div id="consent-settings-btn" class="btn" data- style="margin: 0">Settings</div>
                     </div>
                     <div style="flex-grow: 1; padding: 0 0 0 .5em;">
-                        <div class="btn primary" style="margin: 0">Accept</div>
+                        <div id="consent-accept-btn" class="btn primary" style="margin: 0">Accept</div>
                     </div>
                 </div>
             </div>
@@ -48,10 +47,10 @@ export function modal(options, $t) {
 
 export function option(key, consent) {
     return `
-    <div class="ac">
+    <div class="ac consent-option">
         <div class="ac-header">
             <button class="ac-trigger"></button>
-            ${toggle(consent.i18n?.title, consent.disabled)}
+            ${toggle(key, consent)}
         </div>
         <div class="ac-panel">
           <p class="ac-text">${consent.i18n?.description}</p>
@@ -59,12 +58,13 @@ export function option(key, consent) {
       </div>`
 }
 
-export function toggle(title, disabled = false) {
-    const disabledAttr = disabled ? 'disabled="" checked=""' : ''
-    const label = disabled ? title + '<span style="font-weight:400;font-size: .75em; margin-left:.5em;">(Always Enabled)</span>' : title
+export function toggle(key, consent) {
+    const disabledAttr = consent.required ? 'disabled' : ''
+    const checkedAttr = (consent.defaultState === 'granted') ? 'checked' : ''
+    const label = consent.required ? consent.i18n?.title + '<span style="font-weight:400;font-size: .75em; margin-left:.5em;">(Always Enabled)</span>' : consent.i18n?.title
     return `
     <label class="cl-switch ios switch">
-        <input type="checkbox" ${disabledAttr}>
+        <input id="consent-toggle-${key}" data-consent="${key}" type="checkbox" ${disabledAttr} ${checkedAttr}>
         <span class="switcher"></span>
         <span class="label">${label}</span>
     </label>
