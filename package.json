@@ -1,13 +1,32 @@
 {
   "name": "consent-manager",
+  "private": true,
+  "license": "UNLICENSED",
   "version": "1.0.0",
-  "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
+    "dev": "yarn start",
     "start": "parcel src/index.html --dist-dir example",
     "watch": "parcel watch src/ConsentManager/ConsentManager.js",
-    "build": "parcel build --target ccm"
+    "build": "parcel build  --target ccm --target modern"
   },
+  "devDependencies": {
+    "@parcel/transformer-inline-string": "^2.0.0",
+    "@parcel/transformer-pug": "^2.0.0",
+    "@parcel/transformer-sass": "^2.0.0",
+    "lodash": "^4.17.21",
+    "parcel": "^2.0.0"
+  },
+  "dependencies": {
+    "accordion-js": "^3.1.1",
+    "js-cookie": "^3.0.1",
+    "lodash-es": "^4.17.21",
+    "mitt": "^3.0.0"
+  },
+  "browserslist": [
+    "defaults"
+  ],
   "ccm": "dist/ccm.js",
+  "modern": "dist/ccm.modern.js",
   "frontend": "public/index.html",
   "targets": {
     "frontend": {
@@ -18,14 +37,12 @@
       "source": "src/ConsentManager/ConsentManager.js",
       "context": "browser",
       "outputFormat": "global"
+    },
+    "modern": {
+      "source": "src/ConsentManager/ConsentManager.js",
+      "engines": {
+        "browsers": "Chrome 80"
+      }
     }
-  },
-  "devDependencies": {
-    "lodash-es": "^4.17.21",
-    "parcel": "^2.0.0"
-  },
-  "dependencies": {
-    "js-cookie": "^3.0.1",
-    "mitt": "^3.0.0"
   }
 }

@@ -1,6 +1,6 @@
 {
   "autorun": true,
-  "current_lang": "en",
+  "current_lang": "de",
   "use_rfc_cookie": false,
   "cookie": {
     "name": "cc_cookie",
@@ -14,45 +14,58 @@
     "ad_storage": {
       "state": "denied",
       "required": true,
-      "readOnly": false,
-      "recommended": true
+      "disabled": true,
+      "recommended": true,
+      "i18n": {
+        "title": "Storage",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+      }
     },
     "analytics_storage": {
       "state": "denied",
       "required": true,
-      "readOnly": false,
-      "recommended": true
+      "disabled": false,
+      "recommended": true,
+      "i18n": {
+        "title": "Analytics",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+      }
     },
     "functionality_storage": {
       "state": "denied",
       "required": false,
-      "readOnly": false,
-      "recommended": true
+      "disabled": false,
+      "recommended": true,
+      "i18n": {
+        "title": "Functionality",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+      }
     },
     "personalization_storage": {
       "state": "denied",
       "required": false,
-      "readOnly": false,
+      "disabled": false,
       "recommended": true,
+      "i18n": {
+        "title": "Personalization",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+      }
     },
     "security_storage": {
       "state": "denied",
       "required": false,
-      "readOnly": false,
-      "recommended": true
+      "disabled": false,
+      "recommended": true,
+      "i18n": {
+        "title": "Security",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+      }
     }
   },
   "cookies": [
     {
-      "consentType": "ad_storage",
-      "i18n": {
-        "de": {
-          "title": "ein Cookie in Deutsch"
-        },
-        "en": {
-          "title": "cookie in englisch"
-        }
-      }
+      "name": "adobe",
+      "consentType": "ad_storage"
     }
   ],
   "wait_for_update": 2000,

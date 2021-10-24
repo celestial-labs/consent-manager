@@ -1,0 +1,268 @@
+.consent-reset {
+  p,
+  ol,
+  ul,
+  li,
+  dl,
+  dt,
+  dd,
+  blockquote,
+  figure,
+  fieldset,
+  legend,
+  textarea,
+  pre,
+  iframe,
+  hr,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 0;
+    padding: 0;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-size: 100%;
+    font-weight: normal;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  button,
+  input,
+  select {
+    margin: 0;
+  }
+
+
+
+  *, *::before, *::after {
+    box-sizing: inherit;
+  }
+
+  img,
+  video {
+    height: auto;
+    max-width: 100%;
+  }
+
+  iframe {
+    border: 0;
+  }
+
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+
+  td,
+  th {
+    padding: 0;
+  }
+}
+
+.consent {
+  --highlight: #00F573;
+  --primary-color: #FFFFFF;
+  --secondary-color: #ccc;
+  --primary-bg: #1D273D;
+  --consent-z-index: 99999;
+  //--consent-font: "Lato",sans-serif;
+  //--consent-font: "sans-serif",arial;
+  --consent-font: ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  --consent-text-size: 16px;
+  --consent-text-size-sm: 0.875rem;
+  //--content-text-color: rgb(152, 152, 152);
+  --content-text-color: rgb(230, 230, 230);
+
+  @import './switch.scss';
+  @import './accordion.scss';
+
+
+
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+.backdrop {
+  background: rgba(0,0,0,.75);
+}
+
+.modal {
+  position: fixed;
+  overflow: hidden;
+  z-index: var(--consent-z-index);
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  max-height: 100%;
+  font-family: var(--consent-font);
+  background: var(--primary-bg);
+  color: var(--content-text-color);
+  top: auto;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+
+  border:0;
+  border-top-width: .4em;
+  border-style: solid;
+  border-color: var(--highlight);
+  border-radius: .5em;
+
+  .text_base {
+    font-size: 1em;
+    line-height: 1.5;
+  }
+
+  .text_sm {
+    font-size: 0.875em;
+    line-height: 1.25em;
+  }
+
+  .text_lg {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+
+  .flex {
+    display:flex;
+  }
+
+  .btn {
+    place-content: center;
+    backface-visibility: hidden;
+    border: none;
+    border-radius: 2px;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    min-height: 34px;
+    -webkit-box-pack: center;
+    letter-spacing: 2px;
+    margin: 0.5em;
+    padding: 12px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: all 0.35s ease 0s;
+    white-space: nowrap;
+    width: 95%;
+
+
+
+    //font-family: Helvetica, Arial, sans-serif;
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    line-height: 1;
+
+
+    margin: 0px;
+    flex: 1 1 0%;
+    font-size: 11px;
+    font-weight: 700;
+
+    &.primary {
+      background: var(--highlight);
+      color: #006c32;
+      box-shadow: rgb(0 0 0 / 10%) 0px 1px 1px 1px;
+    }
+  }
+
+
+
+  >.consent_content {
+    display: flex;
+    margin: 0 auto;
+    max-width: 1200px;
+    flex-direction: column;
+    padding: 1em;
+  }
+
+  .consent_title {
+    text-transform: uppercase;
+    margin-bottom: .5em;
+    font-weight: bold;
+    flex: 1;
+
+    text-align: center;
+    padding: .5em 0;
+  }
+
+  .consent_options {
+    overflow-y: scroll;
+    max-height: 300px;
+    height: 300px;
+    margin:1em;
+    padding: .5em 1em;
+    background: #303f5c;
+  }
+
+  .body {
+    display: block;
+    flex: 1 1 auto;
+    margin-right: 1em;
+    margin-bottom: 1em;
+  }
+
+  &.centered {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 800px;
+    bottom: auto;
+    right: auto;
+  }
+
+  &.flat {
+    background: red;
+  }
+}
+
+.fullscreen {
+  position: fixed;
+  top:0;
+  left: 0;
+  right:0;
+  bottom:0;
+}
+
+.ac {
+  border-radius: .4rem;
+
+  .ac-header {
+    position: relative;
+
+  }
+
+  .ac-trigger {
+    min-height: 40px;
+  }
+
+  .ac-panel {
+
+  }
+
+  .ac-text {
+
+  }
+}
+
+
+
+//Flat
+//https://www.onetrust.com/cookie-banner-gallery/

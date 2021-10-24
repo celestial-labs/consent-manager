@@ -1,11 +1,10 @@
 import defaultConfig from './config/defaults.json'
+import i18n from './i18n/de.json'
 import Cookies from 'js-cookie'
 import mitt from 'mitt'
 import merge from 'lodash/merge'
-// import * as Eta from 'eta'
-// import { render } from "preact";
-// import { App } from "./rsx/main";
-// import consentHtml from "./html/consent.html?raw";
+import { Consent } from './templates/default/consent.js';
+import Accordion from 'accordion-js';
 
 export class ConsentManager {
     constructor( options = {} ) {
@@ -72,7 +71,7 @@ export class ConsentManager {
     }
 
     $t($key) {
-        return $key;
+        return i18n[$key];
     }
 
     isBotCheck() {
@@ -96,20 +95,9 @@ export class ConsentManager {
     }
 
     render() {
-        // const renderer = new CookieConsentRenderer(this.$t);
-        // render(<App />, document.getElementById("app"));
+        document.body.insertAdjacentHTML('beforeend', Consent(this.options, this.$t));
 
-
-
-
-        // console.log(Eta.render('The answer to everything is <%= it.answer %>', { answer: 42 }))
-
-        // import './html/consent.html'
-        //document.querySelector('body').insertAdjacentHTML('afterbegin', renderer.render())
-
-        // return document.querySelector('body').append('<div>' +
-        //     '<pre>'+this.options+'</pre>' +
-        //     '</div>');
+        new Accordion('.accordion-container');
     }
 
     // noinspection JSUnusedGlobalSymbols
