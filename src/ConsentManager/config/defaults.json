@@ -1,0 +1,60 @@
+{
+  "autorun": true,
+  "current_lang": "en",
+  "use_rfc_cookie": false,
+  "cookie": {
+    "name": "cc_cookie",
+    "expiryDays": 365,
+    "domain": "location.hostname",
+    "secure": false,
+    "sameSite": "Lax",
+    "cookie_path": "/"
+  },
+  "consentTypes": {
+    "ad_storage": {
+      "state": "denied",
+      "required": true,
+      "readOnly": false,
+      "recommended": true
+    },
+    "analytics_storage": {
+      "state": "denied",
+      "required": true,
+      "readOnly": false,
+      "recommended": true
+    },
+    "functionality_storage": {
+      "state": "denied",
+      "required": false,
+      "readOnly": false,
+      "recommended": true
+    },
+    "personalization_storage": {
+      "state": "denied",
+      "required": false,
+      "readOnly": false,
+      "recommended": true,
+    },
+    "security_storage": {
+      "state": "denied",
+      "required": false,
+      "readOnly": false,
+      "recommended": true
+    }
+  },
+  "cookies": [
+    {
+      "consentType": "ad_storage",
+      "i18n": {
+        "de": {
+          "title": "ein Cookie in Deutsch"
+        },
+        "en": {
+          "title": "cookie in englisch"
+        }
+      }
+    }
+  ],
+  "wait_for_update": 2000,
+  "node": "#app"
+}
