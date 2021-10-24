@@ -156,25 +156,17 @@ export class ConsentManager {
     }
 
     commitConsent() {
-        console.log(window.dataLayer, this.state)
+        // console.log(window.dataLayer, this.state)
 
         this.updateGoogleConsent()
-        console.log(window.dataLayer)
+        // console.log(window.dataLayer)
     }
 
     updateGoogleConsent() {
-        console.log(window.gtag)
-        if(window.gtag) {
-            window.gtag('consent', 'update', {
-                'ad_storage': 'granted',
-                'analytics_storage': 'denied'
-            });
-
-
-            // window.dataLayer.push({
-            //     'event': 'update_consent'
-            // })
-        }
+        window.gtag('consent', 'update', {
+            'ad_storage': 'granted',
+            'analytics_storage': 'denied'
+        });
     }
 }
 
