@@ -3,6 +3,7 @@ import i18n from './i18n/de.json'
 import Cookies from 'js-cookie'
 import mitt from 'mitt'
 import merge from 'lodash/merge'
+import clone from 'lodash/clone'
 import { Consent } from './templates/default/consent.js';
 import Accordion from 'accordion-js';
 
@@ -26,11 +27,12 @@ export class ConsentManager {
         this.consent = null
         this.state = null
         this.consentManagerEl = null
+        this.lastCommit = null
         this.emitter = mitt()
         this.isBot = this.isBotCheck()
         this.isToTrack = this.isToTrackCheck()
 
-        this.emitter.on('*', (type, e) => console.log(type, e))
+        // this.emitter.on('*', (type, e) => console.log(type, e))
         this.emitter.on('consent:initialized', (e) => this.loadConsent(e))
         this.emitter.on('consent:update', (e) => {
             if(window.dataLayer) {
@@ -164,12 +166,16 @@ export class ConsentManager {
     commitConsent() {
         Cookies.set(this.options.cookie.name, JSON.stringify(this.state))
 
-        Object.keys(this.state).forEach((key) => {
-            this.emitter.emit('consent:update', {
-                consentType: key,
-                value: (this.state[key]) ? 'granted' : 'denied'
-            })
+        const newState = {}
+
+        Object.entries(this.state).forEach((item) => {
+            if(!this.lastCommit || this.lastCommit[item[0]] != item[1]) {
+                newState[item[0]] = (item[1]) ? 'granted' : 'denied'
+            }
         })
+
+        this.lastCommit = clone(this.state)
+        this.emitter.emit('consent:update', newState)
     }
 
     updateGoogleConsent() {
