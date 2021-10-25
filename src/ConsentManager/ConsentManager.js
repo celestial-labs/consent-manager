@@ -174,8 +174,8 @@ export class ConsentManager {
             }
         })
 
-        this.lastCommit = clone(this.state)
         this.emitter.emit('consent:update', newState)
+        this.lastCommit = clone(this.state)
     }
 
     updateGoogleConsent() {
