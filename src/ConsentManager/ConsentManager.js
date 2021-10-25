@@ -22,45 +22,52 @@ export class ConsentManager {
     }
 
     init() {
-        this.consentCookie = null
-        this.hasConsent = null
+        this.hasConsent = false
         this.consent = null
         this.state = null
         this.consentManagerEl = null
         this.emitter = mitt()
         this.isBot = this.isBotCheck()
         this.isToTrack = this.isToTrackCheck()
-        this.consentManager = null
 
         this.emitter.on('*', (type, e) => console.log(type, e))
-        this.emitter.on('manager:initialized', (e) => this.loadConsent(e))
+        this.emitter.on('consent:initialized', (e) => this.loadConsent(e))
+        this.emitter.on('consent:update', (e) => {
+            console.log(e)
+            if(window.dataLayer) {
+                window.dataLayer.push({"event": 'consent:update'});
+            }
+        })
 
         if(this.options.autorun) {
             this.emitter.on('consent:loaded', (e) => this.run(e))
         }
 
-        this.emitter.emit('manager:initialized', this)
+        this.emitter.emit('consent:initialized', this)
+    }
+
+    defaultState() {
+        let state = {}
+
+        Object.entries(this.options.consentTypes).forEach((consent) => {
+            state[consent[0]] = !!(consent[1].defaultState === 'granted')
+        })
+
+        return state
     }
 
     loadConsent(e) {
-        this.consentCookie = Cookies.get(this.options.cookie.name)
-        this.hasConsent = false
+        let state = this.defaultState()
 
-        if (this.consentCookie) {
-            this.consent = this.consentCookie
-            this.state = this.consentCookie
+        const consentCookie = Cookies.get(this.options.cookie.name)
+
+        if (consentCookie) {
+            state = merge(state, JSON.parse(consentCookie))
             this.hasConsent = true
-        } else {
-            const state = {}
-
-            Object.entries(this.options.consentTypes).forEach((consent) => {
-                state[consent[0]] = !!(consent[1].defaultState === 'granted')
-            })
-
-            this.state = state
         }
 
-        this.emitter.emit('consent:loaded', {hasConsent: this.hasConsent, consent: this.consent})
+        this.state = state
+        this.emitter.emit('consent:loaded', {hasConsent: this.hasConsent, state: state})
     }
 
     run(e) {
@@ -73,8 +80,10 @@ export class ConsentManager {
 
     show(e) {
         if(!this.isBot && this.isToTrack) {
-            if(!this.consentManager) {
+            if(!this.consentManagerEl) {
                 this.render()
+            } else {
+                this.consentManagerEl.classList.remove('hidden')
             }
         }
     }
@@ -99,10 +108,6 @@ export class ConsentManager {
         return this.isToTrack
     }
 
-    open() {
-        this.show();
-    }
-
     render() {
         // const consentDom = Consent(this.options, this.$t)
         document.body.insertAdjacentHTML('beforeend', Consent(this.options, this.$t));
@@ -114,6 +119,7 @@ export class ConsentManager {
 
             switches.forEach((toggle) => {
                 toggle.addEventListener('change', () => {
+                    this.state[toggle.getAttribute('data-consent')] = toggle.checked
                     this.emitter.emit('consent:toggle', {consent: toggle.getAttribute('data-consent'), value: toggle.checked})
                 });
             })
@@ -126,7 +132,7 @@ export class ConsentManager {
 
             this.emitter.on('consent:btn-clicked', (payload) => {
                 if(payload.btn === 'consent-accept-btn') {
-                    this.commitConsent()
+                    this.acceptConsent()
                 }
 
                 if(payload.btn === 'consent-settings-btn') {
@@ -146,27 +152,41 @@ export class ConsentManager {
         this.emitter.emit('options:merged', {newOptions: this.options, oldOptions: options})
     }
 
-    gTag(method, data) {
-        console.log(method, data)
-    }
-
     setState(state) {
         this.state = state
         this.emitter.emit('state:changed', this.state)
     }
 
-    commitConsent() {
-        // console.log(window.dataLayer, this.state)
+    acceptConsent() {
+        this.commitConsent()
+        this.consentManagerEl.classList.add('hidden')
+    }
 
-        this.updateGoogleConsent()
-        // console.log(window.dataLayer)
+    commitConsent() {
+        Cookies.set(this.options.cookie.name, JSON.stringify(this.state))
+
+        Object.keys(this.state).forEach((key) => {
+            this.emitter.emit('consent:update', {
+                consentType: key,
+                value: (this.state[key]) ? 'granted' : 'denied'
+            })
+        })
     }
 
     updateGoogleConsent() {
-        window.gtag('consent', 'update', {
-            'ad_storage': 'granted',
-            'analytics_storage': 'denied'
-        });
+        // dataLayer.push({"consent", 'update', {ad_storage: 'granted'}})
+
+        // gtag('consent', 'update', {
+        //     ad_storage: data.ad_storage_update,
+        //     analytics_storage: data.analytics_storage_update
+        // });
+
+        // gtag('consent', 'update', {
+        //     'ad_storage': 'granted',
+        //     'analytics_storage': 'denied'
+        // });
+
+        // dataLayer.push({event: "consent", gtm.uniqueEventId: 1})
     }
 }
 

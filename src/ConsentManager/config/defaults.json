@@ -3,7 +3,7 @@
   "current_lang": "de",
   "use_rfc_cookie": false,
   "cookie": {
-    "name": "cc_cookie",
+    "name": "cm_cookie",
     "expiryDays": 365,
     "domain": "location.hostname",
     "secure": false,
@@ -14,7 +14,6 @@
     "functionality_storage": {
       "defaultState": "granted",
       "required": true,
-      "disabled": true,
       "i18n": {
         "title": "Functionality",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
@@ -23,7 +22,6 @@
     "ad_storage": {
       "defaultState": "granted",
       "required": false,
-      "disabled": true,
       "i18n": {
         "title": "Storage",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
@@ -32,7 +30,6 @@
     "analytics_storage": {
       "defaultState": "granted",
       "required": false,
-      "disabled": false,
       "i18n": {
         "title": "Analytics",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
@@ -41,7 +38,6 @@
     "personalization_storage": {
       "defaultState": "granted",
       "required": false,
-      "disabled": false,
       "i18n": {
         "title": "Personalization",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
@@ -50,7 +46,6 @@
     "security_storage": {
       "defaultState": "granted",
       "required": false,
-      "disabled": false,
       "i18n": {
         "title": "Security",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
@@ -60,7 +55,11 @@
   "cookies": [
     {
       "name": "adobe",
-      "consentType": "ad_storage"
+      "consentType": "ad_storage",
+      "i18n": {
+        "title": "Adobe",
+        "description": null
+      }
     }
   ],
   "wait_for_update": 2000,

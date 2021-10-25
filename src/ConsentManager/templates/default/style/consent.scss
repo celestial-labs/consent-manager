@@ -92,9 +92,61 @@
 
   box-sizing: border-box;
   font-size: 16px;
+
+  &.hidden, .hidden {
+    display: none;
+  }
+
+  .text_base {
+    font-size: 1em;
+    line-height: 1.5;
+  }
+
+  .text_sm {
+    font-size: 0.875em;
+    line-height: 1.25em;
+  }
+
+  .text_lg {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+
+  .flex {
+    display:flex;
+  }
+
+  .fullscreen {
+    position: fixed;
+    top:0;
+    left: 0;
+    right:0;
+    bottom:0;
+  }
+
+  .ac {
+    border-radius: .4rem;
+
+    .ac-header {
+      position: relative;
+
+    }
+
+    .ac-trigger {
+      min-height: 40px;
+    }
+
+    .ac-panel {
+
+    }
+
+    .ac-text {
+
+    }
+  }
 }
 
-.backdrop {
+.consent-backdrop {
   background: rgba(0,0,0,.75);
 }
 
@@ -121,28 +173,6 @@
   border-color: var(--highlight);
   border-radius: .5em;
 
-  .hidden {
-    display: none;
-  }
-
-  .text_base {
-    font-size: 1em;
-    line-height: 1.5;
-  }
-
-  .text_sm {
-    font-size: 0.875em;
-    line-height: 1.25em;
-  }
-
-  .text_lg {
-    font-size: 1.125rem;
-    line-height: 1.75rem;
-  }
-
-  .flex {
-    display:flex;
-  }
 
   .btn {
     place-content: center;
@@ -186,15 +216,6 @@
   }
 
 
-
-  >.consent_content {
-    display: flex;
-    margin: 0 auto;
-    max-width: 1200px;
-    flex-direction: column;
-    padding: 1em;
-  }
-
   .consent_title {
     text-transform: uppercase;
     margin-bottom: .5em;
@@ -203,6 +224,14 @@
 
     text-align: center;
     padding: .5em 0;
+  }
+
+  >.consent_content {
+    display: flex;
+    margin: 0 auto;
+    max-width: 1200px;
+    flex-direction: column;
+    padding: 1em;
   }
 
   .consent_options {
@@ -214,7 +243,7 @@
     background: #303f5c;
   }
 
-  .body {
+  .consent_body {
     display: block;
     flex: 1 1 auto;
     margin-right: 1em;
@@ -237,34 +266,7 @@
   }
 }
 
-.fullscreen {
-  position: fixed;
-  top:0;
-  left: 0;
-  right:0;
-  bottom:0;
-}
 
-.ac {
-  border-radius: .4rem;
-
-  .ac-header {
-    position: relative;
-
-  }
-
-  .ac-trigger {
-    min-height: 40px;
-  }
-
-  .ac-panel {
-
-  }
-
-  .ac-text {
-
-  }
-}
 
 
 

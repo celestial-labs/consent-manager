@@ -13,7 +13,7 @@ export function injectStyle() {
 }
 
 export function backdrop() {
-    return `<div class="fullscreen backdrop"></div>`
+    return `<div class="fullscreen consent-backdrop"></div>`
 }
 
 export function modal(options, $t) {
@@ -26,7 +26,7 @@ export function modal(options, $t) {
         <div class="modal centered">
             <div class="consent_content">
                 <div class="consent_title text_lg">${$t('title')}</div>
-                <div class="body text_sm">${$t('body')}</div>
+                <div class="consent_body text_base">${$t('body')}</div>
                 <div id="consent-options" class="consent_options hidden">
                     <div class="accordion-container">
                         ${consents.join('')}
@@ -60,7 +60,7 @@ export function option(key, consent) {
 
 export function toggle(key, consent) {
     const disabledAttr = consent.required ? 'disabled' : ''
-    const checkedAttr = (consent.defaultState === 'granted') ? 'checked' : ''
+    const checkedAttr = (ConsentManager.state[key]) ? 'checked' : ''
     const label = consent.required ? consent.i18n?.title + '<span style="font-weight:400;font-size: .75em; margin-left:.5em;">(Always Enabled)</span>' : consent.i18n?.title
     return `
     <label class="cl-switch ios switch">
