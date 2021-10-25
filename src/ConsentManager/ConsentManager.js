@@ -34,17 +34,18 @@ export class ConsentManager {
 
         // this.emitter.on('*', (type, e) => console.log(type, e))
         this.emitter.on('consent:initialized', (e) => this.loadConsent(e))
-        this.emitter.on('consent:update', (e) => {
-            if(window.dataLayer) {
-                window.dataLayer.push({"event": 'consent:update', payload: e });
-            }
-        })
 
         if(this.options.autorun) {
             this.emitter.on('consent:loaded', (e) => this.run(e))
         }
 
         this.emitter.emit('consent:initialized', this)
+        this.emitter.on('consent:update', (e) => {
+            console.log('e', e)
+            if(window.dataLayer) {
+                window.dataLayer.push({"event": 'consent:update', payload: e });
+            }
+        })
     }
 
     defaultState() {
@@ -174,24 +175,10 @@ export class ConsentManager {
             }
         })
 
+        console.log('newState = '+newState)
+
         this.emitter.emit('consent:update', newState)
         this.lastCommit = clone(this.state)
-    }
-
-    updateGoogleConsent() {
-        // dataLayer.push({"consent", 'update', {ad_storage: 'granted'}})
-
-        // gtag('consent', 'update', {
-        //     ad_storage: data.ad_storage_update,
-        //     analytics_storage: data.analytics_storage_update
-        // });
-
-        // gtag('consent', 'update', {
-        //     'ad_storage': 'granted',
-        //     'analytics_storage': 'denied'
-        // });
-
-        // dataLayer.push({event: "consent", gtm.uniqueEventId: 1})
     }
 }
 
