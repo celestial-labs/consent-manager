@@ -33,9 +33,8 @@ export class ConsentManager {
         this.emitter.on('*', (type, e) => console.log(type, e))
         this.emitter.on('consent:initialized', (e) => this.loadConsent(e))
         this.emitter.on('consent:update', (e) => {
-            console.log(e)
             if(window.dataLayer) {
-                window.dataLayer.push({"event": 'consent:update'});
+                window.dataLayer.push({"event": 'consent:update', payload: e });
             }
         })
 
