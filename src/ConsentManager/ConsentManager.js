@@ -175,8 +175,6 @@ export class ConsentManager {
             }
         })
 
-        console.log('newState = '+newState)
-
         this.emitter.emit('consent:update', newState)
         this.lastCommit = clone(this.state)
     }
