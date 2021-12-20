@@ -7,14 +7,14 @@
     "dev": "yarn start",
     "start": "parcel src/index.html --dist-dir example",
     "watch": "parcel watch src/ConsentManager/ConsentManager.js",
-    "build": "parcel build  --target ccm --target modern"
+    "build": "parcel build --target ccm --target modern"
   },
   "devDependencies": {
     "@parcel/transformer-inline-string": "^2.0.0",
     "@parcel/transformer-pug": "^2.0.0",
     "@parcel/transformer-sass": "^2.0.0",
     "lodash": "^4.17.21",
-    "parcel": "^2.0.0"
+    "parcel": "^2.0.1"
   },
   "dependencies": {
     "accordion-js": "^3.1.1",
