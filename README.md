@@ -1,14 +1,14 @@
 
 # Consent Manager (WIP)
 
-###Einleitung
+### Einleitung
 
 Der Consent Manager ist eine Weiterentwicklung basierend auf dem Cookie Consent Manager von DM und dem im nachfolgenden 
 veröffentlichten Features von Google´s Consent Mode. 
 Dieser ist ein Hilfsmittel zur rechtskonformen Umsetzung der [General Data Protection Regulation (GDPR) der EU](https://gdpr.eu/)
 , und dem [California Consumer Privacy Act (CCPA)](https://oag.ca.gov/privacy/ccpa).
 
-##Features
+### Features
 
 - Kann als Google Tag installiert und konfigurert werden
 - Akzeptiert automatisch die Browservoreinstellung “do not Tracking“
