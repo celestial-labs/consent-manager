@@ -1,27 +1,33 @@
 
-# Consent Manager
+# Consent Manager (WIP)
 
-A brief description of what this project does and who it's for
+###Einleitung
 
+Der Consent Manager ist eine Weiterentwicklung basierend auf dem Cookie Consent Manager von DM und dem im nachfolgenden 
+veröffentlichten Features von Google´s Consent Mode. 
+Dieser ist ein Hilfsmittel zur rechtskonformen Umsetzung der [General Data Protection Regulation (GDPR) der EU](https://gdpr.eu/)
+, und dem [California Consumer Privacy Act (CCPA)](https://oag.ca.gov/privacy/ccpa).
+
+##Features
+
+- Kann als Google Tag installiert und konfigurert werden
+- Akzeptiert automatisch die Browservoreinstellung “do not Tracking“
+- Erkennt selbstständig Crawler wie “Google Search” oder “Baidu“
+- Kann für Besucher aus unterschiedlichen Ländern anders vorkonfiguriert werden.
+
+## WORK IN PROGRESS
+
+- update "Google Tag state" currently not working
+- tests
 
 ## Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](./screen.png)
+![App Screenshot](./screen_2.png)
 
-## Color Reference
+## Setup
 
-| Color             | Hex                                                                |
-| ----------------- | ------------------------------------------------------------------ |
-| Example Color | ![#0a192f](https://via.placeholder.com/10/0a192f?text=+) #0a192f |
-| Example Color | ![#f8f8f8](https://via.placeholder.com/10/f8f8f8?text=+) #f8f8f8 |
-| Example Color | ![#00b48a](https://via.placeholder.com/10/00b48a?text=+) #00b48a |
-| Example Color | ![#00d1a0](https://via.placeholder.com/10/00b48a?text=+) #00d1a0 |
-
-
-## Used By
-
-- Digital-Masters
-
+TODO
 
 ## Tech Stack
 
