@@ -111,7 +111,6 @@ export class ConsentManager {
     }
 
     render() {
-        // const consentDom = Consent(this.options, this.$t)
         document.body.insertAdjacentHTML('beforeend', Consent(this.options, this.$t));
         this.consentManagerEl = document.getElementById('consent-manager')
 
