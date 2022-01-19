@@ -113,7 +113,7 @@ export class ConsentManager {
         document.body.insertAdjacentHTML('beforeend', Consent(this.options, this.$t));
         this.consentManagerEl = document.getElementById('consent-manager')
 
-        setTimeout(() => {
+        setTimeout(() => { // TODO: find solution without timeout
             new Accordion('.accordion-container');
             const switches = this.consentManagerEl.querySelectorAll('.consent .consent-option .switch input')
 
