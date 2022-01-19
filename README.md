@@ -17,7 +17,7 @@ Dieser ist ein Hilfsmittel zur rechtskonformen Umsetzung der [General Data Prote
 - i18n
 
 ## WORK IN PROGRESS
-- Liste aller Cookies
+- eine "Liste aller Cookies" imlementieren
 - Update Tag Manager Consents
 - Reduce Bundler Output
 - Cleanup
